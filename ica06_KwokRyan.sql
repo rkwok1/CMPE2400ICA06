@@ -42,7 +42,7 @@ go
 
 --q6--
 select CustomerID, OrderID, DATEDIFF(DAY,RequiredDate, ShippedDate) as 'Delay Days' from Orders
-where DATEDIFF(DAY,RequiredDate, ShippedDate) > 7 and CustomerID like '[^m-z]%' 
+where DATEDIFF(DAY,RequiredDate, ShippedDate) > 7 and CustomerID like '[^m-z]%' --Does NOT start with letters between m-z
 order by DATEDIFF(DAY,RequiredDate, ShippedDate) asc
 go
 
