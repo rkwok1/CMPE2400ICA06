@@ -46,3 +46,19 @@ where DATEDIFF(DAY,RequiredDate, ShippedDate) > 7 and CustomerID like '[^m-z]%' 
 order by DATEDIFF(DAY,RequiredDate, ShippedDate) asc
 go
 
+--q7--
+select CompanyName as 'Company Name', City, PostalCode as 'Postal Code' from Customers
+where PostalCode like '[a-z][a-z,0-9]%'
+go
+
+--q8--
+select Distinct Discount as 'Discount' from [Order Details] --Distinct allows you to only us values that are unique from each other
+order by Discount desc
+go
+
+--q9--
+declare @max float = 20
+
+select Distinct ProductID, Round((Quantity * UnitPrice) * (1 - discount), 0) as 'Value' from [Order Details]
+where Round((Quantity * UnitPrice) * (1 - discount), 0) < @max and (Quantity * UnitPrice) * (1 - discount) = Round((Quantity * UnitPrice) * (1 - discount), 0)
+order by [Value] desc, ProductID desc --Value represents whats in your select statement alias 'value'
