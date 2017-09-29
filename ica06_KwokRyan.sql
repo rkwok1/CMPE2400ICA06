@@ -48,7 +48,8 @@ go
 
 --q7--
 select CompanyName as 'Company Name', City, PostalCode as 'Postal Code' from Customers
-where PostalCode like '[a-z][a-z,0-9]%'
+where PostalCode like '[a-z][a-z,0-9]%' and CompanyName not like '%[s]' --'[a-s][a-z,0-9] means that the first charcter may be anything a-z. [a-z,0,9] means the second charcter may be a-z or 0-9. Everyting after can be anything, so we don't need to adjust.
+order by City
 go
 
 --q8--
@@ -61,4 +62,4 @@ declare @max float = 20
 
 select Distinct ProductID, Round((Quantity * UnitPrice) * (1 - discount), 0) as 'Value' from [Order Details]
 where Round((Quantity * UnitPrice) * (1 - discount), 0) < @max and (Quantity * UnitPrice) * (1 - discount) = Round((Quantity * UnitPrice) * (1 - discount), 0)
-order by [Value] desc, ProductID desc --Value represents whats in your select statement alias 'value'
+order by [Value] desc, ProductID desc --Value represents whats in your select statement alias 'Value'. SUPER HANDY!!!!
